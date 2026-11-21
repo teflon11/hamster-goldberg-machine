@@ -6,14 +6,14 @@
 
 ![Машина Голдберга в момент звона: шарик перевесил чашу весов, колокольчик звенит, хомяк прыгает в колесо](docs/preview.png)
 
-**[▶ Открыть экспонат](https://<user>.github.io/<repo>/)** — работает без сборки, без сервера и без интернета.
+**[▶ Открыть экспонат](https://teflon11.github.io/hamster-goldberg-machine/)** — работает без сборки, без сервера и без интернета.
 
 ---
 
 ## Запуск
 
 ```bash
-git clone https://github.com/<user>/<repo>.git
+git clone https://github.com/teflon11/hamster-goldberg-machine.git
 ```
 
 Откройте `index.html` двойным кликом. Всё — Matter.js 0.20.0, вся сцена, вся
@@ -100,7 +100,8 @@ Canvas масштабируется с сохранением пропорций
 index.html              — экспонат: сцена, физика, отрисовка, звук, интерфейс
 promtFlash.md           — техническое задание и разбор реализации
 README.md
-.gitignore
+.gitignore              — node_modules, .qwen/, мусор приёмки
+.gitattributes          — LF во всём текстовом; index.html не должен меняться при checkout
 
 docs/preview.png        — кадр в момент звона (7/8 этапов)
 docs/preview-final.png  — финальный кадр, все 8 этапов
