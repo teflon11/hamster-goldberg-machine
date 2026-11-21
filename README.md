@@ -115,6 +115,7 @@ dev/                    — харнес сборки и приёмки (в ре
   test.js               — 5 прогонов ядра в чистом Node
   verify.js             — 5 прогонов в headless-браузере + 6 размеров окна
   verify-live.js        — живой путь: клик «Пуск» → ожидание → «Сброс»
+  verify-online.js      — то же на опубликованном URL Pages (после деплоя)
   inspect.js            — контроль автономности готового index.html
   readme-check.js       — сверяет утверждения README с кодом
   preview.js            — пересоздаёт картинки из docs/
@@ -144,6 +145,7 @@ node clash.js        # сборка без взаимных пересечени
 node test.js 5       # 5 прогонов ядра в чистом Node
 node verify.js       # 5 прогонов + 6 размеров окна + ловля ошибок страницы
 node verify-live.js  # живой путь: клик «Пуск» → ожидание → «Сброс»
+node verify-online.js # после деплоя: те же проверки на живом URL Pages
 ```
 
 Если вместо Edge у вас Chrome: `QWEN_CHANNEL=chrome node verify.js`. Промежуточные

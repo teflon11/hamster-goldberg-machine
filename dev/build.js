@@ -30,10 +30,15 @@ for (const bad of ['src="http', "src='http", 'src=./', 'src="../', 'href="http',
                    '@import', 'importScripts', 'url(http', "url('http", 'new Worker(', 'fetch(']) {
   if (out.includes(bad)) throw new Error('внешняя загрузка в готовом файле: ' + bad);
 }
-const tags = out.match(/<(script|link|img|iframe)[^>]*>/gi) || [];
+const tags = out.match(/<(script|link|img|iframe)\b[^>]*>/gi) || [];
 for (const tg of tags) {
-  if (/<link|<img|<iframe/.test(tg)) throw new Error('неожиданный тег: ' + tg.slice(0, 60));
-  if (/src\s*=/.test(tg)) throw new Error('script с внешним src: ' + tg.slice(0, 60));
+  if (/<img\b|<iframe\b/i.test(tg)) throw new Error('неожиданный тег: ' + tg.slice(0, 60));
+  // Любой src/href обязан быть data: URI — иначе файл уже не автономен.
+  const urls = [...tg.matchAll(/(?:src|href)\s*=\s*"([^"]*)"/gi)].map(m => m[1]);
+  for (const u of urls) {
+    if (!/^data:/i.test(u)) throw new Error('не-data URL в ' + tg.slice(1, 8) + ': ' + u.slice(0, 70));
+  }
+  if (/<script\b/i.test(tg) && urls.length) throw new Error('script с src: ' + tg.slice(0, 60));
 }
 
 fs.writeFileSync(P.INDEX, out);
